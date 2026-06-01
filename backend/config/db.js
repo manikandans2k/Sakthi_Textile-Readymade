@@ -6,7 +6,8 @@ const dbConfig = {
   host: process.env.DB_HOST || 'localhost',
   port: process.env.DB_PORT || 3306,
   user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || ''
+  password: process.env.DB_PASSWORD || '',
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: true } : null
 };
 
 const dbName = process.env.DB_NAME || 'textile_pos_erp';
@@ -80,8 +81,10 @@ async function initializeDatabase() {
       ...dbConfig,
       database: dbName,
       waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0
+      connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT, 10) || 10,
+      queueLimit: 0,
+      enableKeepAlive: true,
+      keepAliveInitialDelay: 10000
     });
     
     console.log(`Switched to "${dbName}". Verifying base and inventory tables...`);
