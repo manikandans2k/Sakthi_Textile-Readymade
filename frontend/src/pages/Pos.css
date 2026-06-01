@@ -1,0 +1,545 @@
+/* ============================================================
+   POS.css — TexTile ERP High-Speed Touch POS Workspace Styles
+   Palette: #0F172A | #2563EB | #F59E0B
+   ============================================================ */
+
+/* ── Scrollbar Overrides ── */
+.pos-catalogue::-webkit-scrollbar,
+.pos-cart-sticky .overflow-auto::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.pos-catalogue::-webkit-scrollbar-track,
+.pos-cart-sticky .overflow-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pos-catalogue::-webkit-scrollbar-thumb,
+.pos-cart-sticky .overflow-auto::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.pos-catalogue::-webkit-scrollbar-thumb:hover,
+.pos-cart-sticky .overflow-auto::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+/* ── Touch Product Grid Layout ── */
+.touch-grid-container {
+  display: grid;
+  gap: 12px;
+  padding-bottom: 20px;
+}
+
+/* Desktop: 4 product cards per row */
+@media (min-width: 992px) {
+  .touch-grid-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Tablet: 2 product cards per row */
+@media (min-width: 576px) and (max-width: 991px) {
+  .touch-grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: 1 product card per row & responsive spacing */
+@media (max-width: 575px) {
+  .touch-grid-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .return-mode-banner {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 8px;
+  }
+  .return-mode-banner input {
+    width: 100% !important;
+  }
+  .pos-payment-modal .col-6 {
+    width: 100% !important;
+  }
+}
+
+/* ── Product Card ── */
+.premium-product-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 148px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02);
+  cursor: pointer;
+  user-select: none;
+}
+
+.premium-product-card:hover {
+  border-color: #2563eb;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08);
+  transform: translateY(-2px);
+}
+
+.premium-product-card:active {
+  transform: scale(0.97);
+}
+
+/* ── Product Card Inner Elements ── */
+.product-badge-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.product-sku-tag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.product-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 2.5em;
+}
+
+.product-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.meta-pill {
+  font-size: 0.62rem;
+  font-weight: 600;
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.meta-pill-dark {
+  font-size: 0.62rem;
+  font-weight: 600;
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.product-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 6px;
+  margin-top: auto;
+}
+
+.product-price-value {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.product-price-unit {
+  font-size: 0.65rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.product-tap-button {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.08);
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.premium-product-card:hover .product-tap-button {
+  background: #2563eb;
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+/* ── Category Pill Strip ── */
+.category-pill-container {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  scrollbar-width: none;
+}
+
+.category-pill-container::-webkit-scrollbar {
+  display: none;
+}
+
+.premium-cat-pill {
+  padding: 6px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: #475569;
+  font-weight: 600;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.premium-cat-pill:hover {
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+.premium-cat-pill.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+}
+
+/* ── Cart Item Card ── */
+.checkout-item-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.15s ease;
+  position: relative;
+  flex-shrink: 0; /* Prevent vertical squishing by flex layout height limits */
+}
+
+/* ── Payment Method Selector Grid ── */
+.payment-method-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+/* ── Primary Gradient CTA Button ── */
+.glowing-gradient-btn {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff !important;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  transition: all 0.2s ease;
+}
+
+.glowing-gradient-btn:hover {
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+  background: linear-gradient(135deg, #2d6eff, #1e55ec);
+}
+
+.glowing-gradient-btn:active {
+  transform: scale(0.98);
+}
+
+.glowing-gradient-btn:disabled {
+  background: #cbd5e1;
+  box-shadow: none;
+  color: #94a3b8 !important;
+}
+
+/* ── Totals Summary Card ── */
+.totals-summary-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.totals-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.net-payable-badge {
+  background: rgba(37, 99, 235, 0.04);
+  border: 1px solid rgba(37, 99, 235, 0.1);
+  border-radius: 10px;
+  padding: 6px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.net-payable-badge .label {
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 0.9rem;
+}
+
+.net-payable-badge .amount {
+  font-weight: 700;
+  color: #2563eb;
+  font-size: 1.25rem;
+}
+
+/* ── Swaying Hanger Animation (Empty Cart) ── */
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+.swaying-hanger {
+  transform-origin: top center;
+  animation: sway 2.5s ease-in-out infinite;
+}
+
+/* ── Low-Stock Badge ── */
+.badge-low-stock {
+  font-size: 0.65rem;
+  background-color: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 9999px;
+  padding: 2px 8px;
+  font-weight: 600;
+}
+
+/* ── Network Status Banner ── */
+.network-banner-online {
+  background-color: rgba(37, 99, 235, 0.05);
+  border-color: rgba(37, 99, 235, 0.15) !important;
+}
+
+.network-banner-offline {
+  background-color: rgba(245, 158, 11, 0.05);
+  border-color: rgba(245, 158, 11, 0.15) !important;
+}
+
+/* ── Return Mode Alert Banner ── */
+.return-mode-banner {
+  background-color: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Autocomplete Dropdown ── */
+.pos-autocomplete-dropdown {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  margin-top: 4px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+  overflow: hidden;
+  z-index: 1060;
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.pos-autocomplete-header {
+  background: #f8fafc;
+  padding: 6px 12px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.pos-autocomplete-item {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.pos-autocomplete-item:hover {
+  background: #f8fafc;
+}
+
+/* ── Drafts Drawer ── */
+.pos-drafts-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 420px;
+  background: #ffffff;
+  border-left: 1px solid #e2e8f0;
+  box-shadow: -8px 0 32px rgba(15, 23, 42, 0.08);
+  padding: 1.5rem;
+  z-index: 1100;
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+}
+
+/* ── Payment Modal Overlay ── */
+.pos-payment-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+}
+
+.pos-payment-modal {
+  width: 480px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.2);
+}
+
+/* ── Customer Register Modal ── */
+.pos-customer-modal {
+  width: 400px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.2);
+}
+
+/* ── Keyboard Shortcut Legend ── */
+.pos-shortcut-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: #94a3b8;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 10px;
+  margin-top: 12px;
+  gap: 4px;
+}
+
+.pos-shortcut-legend span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── Loyalty Customer Bar ── */
+.pos-loyalty-bar {
+  background: rgba(37, 99, 235, 0.06);
+  padding: 8px 14px;
+  border-top: 1px solid rgba(37, 99, 235, 0.1);
+  border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+/* ── Applied Coupon Bar ── */
+.pos-coupon-bar {
+  background: rgba(34, 197, 94, 0.06);
+  padding: 8px 14px;
+  border-top: 1px solid rgba(34, 197, 94, 0.12);
+  border-bottom: 1px solid rgba(34, 197, 94, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+/* ── Responsive Adjustments ── */
+@media (max-width: 768px) {
+  .premium-product-card {
+    height: 140px;
+  }
+
+  .pos-drafts-drawer {
+    width: 100%;
+  }
+
+  .pos-payment-modal,
+  .pos-customer-modal {
+    width: 95vw;
+    margin: 0 auto;
+  }
+}
+
+/* ── Layout Stacking for Tablet & Mobile viewports (max-width: 991px) ── */
+@media (max-width: 991px) {
+  .pos-container {
+    flex-direction: column !important;
+    height: auto !important;
+    overflow: visible !important;
+    gap: 16px;
+  }
+  .pos-catalogue {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .pos-catalogue-grid-wrapper {
+    height: auto !important;
+    max-height: 450px;
+    overflow-y: auto !important;
+  }
+  .pos-cart-sticky {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 480px;
+    margin-top: 10px;
+    flex-shrink: 1 !important;
+  }
+  .main-wrapper main:has(.pos-page-layout) {
+    overflow: auto !important;
+    padding: 8px 12px !important;
+  }
+}
+
