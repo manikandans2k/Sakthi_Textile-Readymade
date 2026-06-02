@@ -1,13 +1,10 @@
 import axios from 'axios';
 
 // Detect environment to configure the API base URL
-// Respects VITE_API_URL environment variable if provided, else falls back to localhost or relative origin paths
+// Uses port 5000 in Dev mode, uses relative origin path in Production build
 const getBaseURL = () => {
-  if (import.meta.env.VITE_API_URL) {
-    return import.meta.env.VITE_API_URL;
-  }
   const { origin } = window.location;
-  if (origin.includes('localhost') || origin.includes('127.0.0.1') || origin.includes(':3000')) {
+  if (origin.includes(':3000')) {
     return 'http://localhost:5000/api';
   }
   return '/api';

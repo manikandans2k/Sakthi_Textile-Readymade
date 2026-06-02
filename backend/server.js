@@ -25,39 +25,12 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Enable trust proxy so Express correctly handles client IPs behind Render's load balancer
-app.set('trust proxy', 1);
-
-// CORS setup: restrict origins in production
-const allowedOrigins = [
-  'http://localhost:3000',
-  'http://localhost:5173',
-  'http://127.0.0.1:5173',
-  'http://localhost:5000'
-];
-
-if (process.env.FRONTEND_URL) {
-  // Normalize by stripping any trailing slash
-  allowedOrigins.push(process.env.FRONTEND_URL.replace(/\/$/, ''));
-}
-
+// CORS setup
+// Grant full resource sharing for localhost origins (development & production POS interfaces)
 app.use(cors({
-  origin: (origin, callback) => {
-    // Allow non-browser requests (like server-to-server, mobile app tests, or Postman)
-    if (!origin) return callback(null, true);
-    
-    const isAllowed = allowedOrigins.includes(origin) || 
-                      origin.endsWith('.onrender.com') ||
-                      (process.env.NODE_ENV !== 'production' && origin.startsWith('http://localhost:'));
-                      
-    if (isAllowed) {
-      return callback(null, true);
-    }
-    return callback(new Error(`CORS Policy: Origin ${origin} is unauthorized.`), false);
-  },
+  origin: '*', // Allows cross-origin REST API calls from Vite dev server/production clients
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
